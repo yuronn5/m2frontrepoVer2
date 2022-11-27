@@ -5,22 +5,40 @@ define(['ko', 'uiComponent'], function (ko, Component){
         defaults: {
             template: 'Elogic_SimpleKoModule/timer',
             myFlag: true,
+            titleFromKo: ko.observable(''),
             productName: ko.observable(''),
-            wrongOne: ko.observable('wrong')
+            wrongOne: ko.observable('wrong'),
+            clock: ko.observable('')
         },
 
         initialize: function (config) {
             this._super();
-            this.titleFromKo = ko.observable(config.titleMessage);
+            this.titleFromKo = config.titleMessage;
             this.productName = config.productNameFromPhtml;
+            // console.log(this)
+            // console.log(config)
+            // console.log(this.getTitle())
+            setInterval(this.reloadTime.bind(this), 1000)
         },
 
         getTitle: function () {
+            // console.log(this.titleFromKo)
+            // console.log(this.getThisExample())
+            // console.log(this)
             return this.productName;
         },
-
         getFalseTitle: function () {
+            // console.log(this)
             return this.wrongOne;
+        },
+        getThisExample: function () {
+            // debugger;
+            // console.log(this)
+            return "Current this is";
+        },
+        reloadTime: function () {
+            let time = new Date;
+            this.clock(time);
         }
     })
 
