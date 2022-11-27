@@ -37,8 +37,9 @@ define(['ko', 'uiComponent'], function (ko, Component){
             return "Current this is";
         },
         reloadTime: function () {
-            let time = new Date;
-            this.clock(time);
+            let date = new Date();
+            const time = date.toTimeString().split(' ')[0].split(':');
+            this.clock(time[0] + ':' + time[1] + ':' + time[2]);
         }
     })
 
