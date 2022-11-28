@@ -252,7 +252,7 @@
     * [magento/magento2#25808](https://github.com/magento/magento2/pull/25808) -- No marginal white space validation added (by @ajithkumar-maragathavel)
     * [magento/magento2#25790](https://github.com/magento/magento2/pull/25790) -- Don't disable FPC for maintenance, instead send "no cache" headers (by @Parakoopa)
     * [magento/magento2#25774](https://github.com/magento/magento2/pull/25774) -- [Config] Giving the possibility to have a config dependency based on empty config value (by @eduard13)
-    * [magento/magento2#25604](https://github.com/magento/magento2/pull/25604) -- Moving Ui message.js hide speed and timeout into variables for easier (by @edward-simpson)
+    * [magento/magento2#25604](https://github.com/magento/magento2/pull/25604) -- Moving Ui my-step-view.js hide speed and timeout into variables for easier (by @edward-simpson)
     * [magento/magento2#25541](https://github.com/magento/magento2/pull/25541) -- Removes hardcoded references to country selector component (by @krzksz)
     * [magento/magento2#25939](https://github.com/magento/magento2/pull/25939) -- [ProductAlert] Cover Helper Data by Unit Test (by @edenduong)
     * [magento/magento2#25928](https://github.com/magento/magento2/pull/25928) -- [Variable] Cover Variable Data Model by Unit Test (by @edenduong)
