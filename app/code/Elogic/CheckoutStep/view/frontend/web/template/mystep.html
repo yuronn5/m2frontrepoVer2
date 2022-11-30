@@ -1,12 +1,12 @@
 <!--The 'step_code' value from the .js file should be used-->
-<li id="step_code" data-bind="fadeVisible: isVisible" data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": true}}'>
+<li id="step_code" data-bind="mageInit: {'collapsible':{'openedState': 'active', 'active': false}}, fadeVisible: isVisible">
 
-    <div class="step-title" data-role="collapsible">
+    <div class="step-title" data-role="title" role="tab" aria-selected="false" aria-expanded="false" tabindex="0">
         <div data-role="trigger">
-            <span>Stepppp title</span>
+            <span>Second step title</span>
         </div>
     </div>
-    <div class="step-content" data-role="content">
+    <div class="step-content" data-role="content" role="tabpanel" aria-hidden="true">
         <div class="message warning">
                 <span data-bind="text: superMessageCheckout"></span>
         </div>
