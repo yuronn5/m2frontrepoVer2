@@ -2,8 +2,9 @@ define([
     'ko',
     'uiComponent',
     'underscore',
-    'Magento_Checkout/js/model/step-navigator'
-], function (ko, Component, _, stepNavigator) {
+    'Magento_Checkout/js/model/step-navigator',
+    'Magento_Customer/js/customer-data'
+], function (ko, Component, _, stepNavigator, customerData) {
     'use strict';
 
     /**
@@ -17,6 +18,7 @@ define([
 
         // add here your logic to display step,
         isVisible: ko.observable(true),
+        isLoggedIn: ko.observable(window.isCustomerLoggedIn),
 
         /**
          * @returns {*}
@@ -64,6 +66,14 @@ define([
          */
         navigateToNextStep: function () {
             stepNavigator.next();
+        },
+
+        checkValidation: function () {
+            if (this.isLoggedIn._latestValue) {
+                alert("yeee")
+            } else {
+                alert("nooo")
+            }
         }
     });
 });

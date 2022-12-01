@@ -1,10 +1,23 @@
 <!--The 'step_code' value from the .js file should be used-->
-<li id="step_code" data-bind="fadeVisible: isVisible">
-    <div class="step-title" data-bind="i18n: 'Step Title'" data-role="title"></div>
-    <div class="step-content">
+<li id="step_code" data-bind="mageInit: {'collapsible':{'openedState': 'active', 'active': false}}, fadeVisible: isVisible">
+
+    <div class="step-title" data-role="title" role="tab" aria-selected="false" aria-expanded="false" tabindex="0">
+        <div data-role="trigger" click="checkValidation">
+            <span>Second step title</span>
+        </div>
+    </div>
+    <div class="step-content" data-role="content" role="tabpanel" aria-hidden="true">
         <div class="message warning">
                 <span data-bind="text: superMessageCheckout"></span>
         </div>
+        <form class="ask-for-more-information-form information_menu_form" name="ask_for_more_information_form" data-mage-init='{"validation": {}}'>
+            <input class="formName" name="name" type="text" autocomplete="off" required placeholder="Name">
+            <input class="formMenuemail" name="menuemail" type="text" autocomplete="off" required placeholder="Email" data-validate="{required:true, 'validate-email':true}">
+            <input type="text" title="Telephone" class="formTelephone" name="telephone" required autocomplete="off" placeholder="Phone" data-validate="{required:true, 'validate-number':true}">
+            <textarea class="formComment" name="comment" placeholder="Write your message here"></textarea>
+            <input type="reset" class="configreset" value="Clear">
+            <input type="submit"  value="Test Submit">
+        </form>
     </div>
     <div id="checkout-step-title"
          class="step-content"
