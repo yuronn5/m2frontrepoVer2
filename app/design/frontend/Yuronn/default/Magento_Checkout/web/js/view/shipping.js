@@ -87,11 +87,12 @@ define([
 
             //checks if user is logged in
             if (this.isLoggedIn._latestValue) {
-                alert("logged in")
+                console.log("logged in")
                 //custom method for logged in user
             }
             if (!this.isLoggedIn._latestValue) {
-                alert("logged out")
+                console.log("logged out")
+                alert("Customer is not logged in")
                 //custom method for logged out user
             }
 
@@ -381,6 +382,41 @@ define([
 
             if (this.source.get('shippingAddress.custom_attributes')) {
                 this.source.trigger('shippingAddress.custom_attributes.data.validate');
+            }
+        },
+
+        customCheckValidation: function (){
+            let shippingAddress,
+                addressData,
+                loginFormSelector = 'form[data-role=email-with-possible-login]',
+                emailValidationResult = customer.isLoggedIn(),
+                validateForm = $('.field-error'),
+                collapsibleForm = $("#opc-shipping_method");
+
+            if (this.isLoggedIn._latestValue) {
+                alert("logged in")
+                //code for it
+            }
+            if (!this.isLoggedIn._latestValue) {
+                // alert("Customer is not logged in")
+
+                shippingAddress = quote.shippingAddress();
+                addressData = addressConverter.formAddressDataToQuoteAddress(
+                    this.source.get('shippingAddress')
+                );
+
+                $(loginFormSelector).validation();
+                emailValidationResult = Boolean($(loginFormSelector + ' input[name=username]').valid());
+                this.triggerShippingDataValidateEvent();
+
+
+                if (validateForm.size() <= 0 && emailValidationResult) {
+                    alert("nothing to validate")
+                    collapsibleForm.collapsible("option","disabled",false);
+                } else {
+                    alert("we got an error with validation")
+                    collapsibleForm.collapsible("option","disabled",true);
+                }
             }
         }
     });

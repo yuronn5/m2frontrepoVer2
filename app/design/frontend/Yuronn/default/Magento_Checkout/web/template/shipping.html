@@ -40,7 +40,6 @@
         <render if="isFormInline" args="shippingFormTemplate" />
     </div>
 </li>
-
 <!--Shipping method template-->
 <li id="opc-shipping_method"
     class="checkout-shipping-method"
@@ -49,7 +48,7 @@
     <div class="checkout-shipping-method">
         <div class="step-title"
              translate="'Shipping Methods'"
-             data-role="title" role="tab" aria-selected="false" aria-expanded="false" tabindex="0" />
+             data-role="title" role="tab" aria-selected="false" aria-expanded="false" tabindex="0" data-bind="click: customCheckValidation" />
 
         <each args="getRegion('before-shipping-method-form')" render="" />
 
