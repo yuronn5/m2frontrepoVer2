@@ -52,7 +52,6 @@ define([
     $t
 ) {
     'use strict';
-
     var popUp = null;
 
     return Component.extend({
@@ -73,7 +72,6 @@ define([
         isNewAddressAdded: ko.observable(false),
         saveInAddressBook: 1,
         quoteIsVirtual: quote.isVirtual(),
-        isLoggedIn: ko.observable(window.isCustomerLoggedIn),
 
         /**
          * @return {exports}
@@ -84,17 +82,6 @@ define([
                 fieldsetName = 'checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset';
 
             this._super();
-
-            //checks if user is logged in
-            if (this.isLoggedIn._latestValue) {
-                console.log("logged in")
-                //custom method for logged in user
-            }
-            if (!this.isLoggedIn._latestValue) {
-                console.log("logged out")
-                alert("Customer is not logged in")
-                //custom method for logged out user
-            }
 
             if (!quote.isVirtual()) {
                 stepNavigator.registerStep(
@@ -132,8 +119,36 @@ define([
                         $.extend(true, {}, checkoutProvider.get('shippingAddress'), shippingAddressData)
                     );
                 }
-                checkoutProvider.on('shippingAddress', function (shippingAddrsData) {
-                    if (shippingAddrsData.street && !_.isEmpty(shippingAddrsData.street[0])) {
+                checkoutProvider.on('shippingAddress', function (shippingAddrsData, changes) {
+                    var isStreetAddressDeleted, isStreetAddressNotEmpty;
+
+                    /**
+                     * In last modifying operation street address was deleted.
+                     * @return {Boolean}
+                     */
+                    isStreetAddressDeleted = function () {
+                        var change;
+
+                        if (!changes || changes.length === 0) {
+                            return false;
+                        }
+
+                        change = changes.pop();
+
+                        if (_.isUndefined(change.value) || _.isUndefined(change.oldValue)) {
+                            return false;
+                        }
+
+                        if (!change.path.startsWith('shippingAddress.street')) {
+                            return false;
+                        }
+
+                        return change.value.length === 0 && change.oldValue.length > 0;
+                    };
+
+                    isStreetAddressNotEmpty = shippingAddrsData.street && !_.isEmpty(shippingAddrsData.street[0]);
+
+                    if (isStreetAddressNotEmpty || isStreetAddressDeleted()) {
                         checkoutData.setShippingAddressFromData(shippingAddrsData);
                     }
                 });
@@ -263,6 +278,7 @@ define([
          * Set shipping information handler
          */
         setShippingInformation: function () {
+
             if (this.validateShippingInformation()) {
                 quote.billingAddress(null);
                 checkoutDataResolver.resolveBillingAddress();
@@ -285,6 +301,25 @@ define([
         },
 
         /**
+         * Set shipping information handler
+         */
+        openNextTab: function () {
+            let emailValidationResult = customer.isLoggedIn(),
+                loginFormSelector = 'form[data-role=email-with-possible-login]';
+            if (!customer.isLoggedIn()) {
+                $(loginFormSelector).validation();
+                emailValidationResult = Boolean($(loginFormSelector + ' input[name=username]').valid());
+            }
+            this.triggerShippingDataValidateEvent();
+            if (this.validateShippingInformation()) {
+                $("#shipping-title").collapsible("enable");
+                $("#shipping-title").collapsible("forceActivate");
+            } else {
+                $("#shipping-title").collapsible("disable");
+            }
+        },
+
+        /**
          * @return {Boolean}
          */
         validateShippingInformation: function () {
@@ -295,6 +330,7 @@ define([
                 field,
                 option = _.isObject(this.countryOptions) && this.countryOptions[quote.shippingAddress().countryId],
                 messageContainer = registry.get('checkout.errors').messageContainer;
+
 
             if (!quote.shippingMethod()) {
                 this.errorValidationMessage(
@@ -366,7 +402,7 @@ define([
             }
 
             if (!emailValidationResult) {
-                $(loginFormSelector + ' input[name=username]').focus();
+                $(loginFormSelector + ' input[name=username]').trigger('focus');
 
                 return false;
             }
@@ -382,41 +418,6 @@ define([
 
             if (this.source.get('shippingAddress.custom_attributes')) {
                 this.source.trigger('shippingAddress.custom_attributes.data.validate');
-            }
-        },
-
-        customCheckValidation: function (){
-            let shippingAddress,
-                addressData,
-                loginFormSelector = 'form[data-role=email-with-possible-login]',
-                emailValidationResult = customer.isLoggedIn(),
-                validateForm = $('.field-error'),
-                collapsibleForm = $("#opc-shipping_method");
-
-            if (this.isLoggedIn._latestValue) {
-                alert("logged in")
-                //code for it
-            }
-            if (!this.isLoggedIn._latestValue) {
-                // alert("Customer is not logged in")
-
-                shippingAddress = quote.shippingAddress();
-                addressData = addressConverter.formAddressDataToQuoteAddress(
-                    this.source.get('shippingAddress')
-                );
-
-                $(loginFormSelector).validation();
-                emailValidationResult = Boolean($(loginFormSelector + ' input[name=username]').valid());
-                this.triggerShippingDataValidateEvent();
-
-
-                if (validateForm.size() <= 0 && emailValidationResult) {
-                    alert("nothing to validate")
-                    collapsibleForm.collapsible("option","disabled",false);
-                } else {
-                    alert("we got an error with validation")
-                    collapsibleForm.collapsible("option","disabled",true);
-                }
             }
         }
     });
