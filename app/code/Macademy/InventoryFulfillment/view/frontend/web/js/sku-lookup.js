@@ -3,7 +3,8 @@ define(['uiComponent', 'ko'], function (Component, ko) {
 
     return Component.extend({
         defaults: {
-            sku: ko.observable('abc1234')
+            sku: ko.observable('abc1234'),
+            placeholder: 'Example: 24t61'
         },
 
         initialize() {
