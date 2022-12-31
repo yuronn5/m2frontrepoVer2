@@ -11,6 +11,10 @@ define(['uiComponent', 'ko'], function (Component, ko) {
             this._super();
 
             console.log("the skuLookup has been loaded")
+        },
+
+        handleSubmit() {
+            console.log(this.sku() + ' Sku confirmed')
         }
     });
 });
