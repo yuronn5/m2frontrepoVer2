@@ -1,9 +1,9 @@
-define(['uiComponent'], function (Component) {
+define(['uiComponent', 'ko'], function (Component, ko) {
     'use strict';
 
     return Component.extend({
         defaults: {
-            sku: 'abc1234'
+            sku: ko.observable('abc1234')
         },
 
         initialize() {
