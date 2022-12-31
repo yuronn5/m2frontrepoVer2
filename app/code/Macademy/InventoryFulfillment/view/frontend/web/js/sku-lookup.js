@@ -4,7 +4,8 @@ define(['uiComponent', 'ko', 'mage/storage'], function (Component, ko, storage) 
     return Component.extend({
         defaults: {
             sku: ko.observable('24-MB01'),
-            placeholder: 'Example: 24t61'
+            placeholder: 'Example: 24t61',
+            messageResponse: ko.observable('')
         },
 
         initialize() {
@@ -14,13 +15,19 @@ define(['uiComponent', 'ko', 'mage/storage'], function (Component, ko, storage) 
         },
 
         handleSubmit() {
+            this.messageResponse('');
+
             console.log(this.sku() + ' Sku confirmed')
 
             storage.get(`rest/V1/products/${this.sku()}`)
                 .done(response => {
-                    console.log(response)
+                    this.messageResponse(`Product found <strong>${response.name}</strong>`);
+                })
+                .fail(() => {
+                    this.messageResponse('Product not found!');
                 })
         }
     });
 });
+
 
