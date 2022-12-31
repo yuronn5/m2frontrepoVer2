@@ -1,9 +1,9 @@
-define(['uiComponent', 'ko'], function (Component, ko) {
+define(['uiComponent', 'ko', 'mage/storage'], function (Component, ko, storage) {
     'use strict';
 
     return Component.extend({
         defaults: {
-            sku: ko.observable('abc1234'),
+            sku: ko.observable('24-MB01'),
             placeholder: 'Example: 24t61'
         },
 
@@ -15,6 +15,11 @@ define(['uiComponent', 'ko'], function (Component, ko) {
 
         handleSubmit() {
             console.log(this.sku() + ' Sku confirmed')
+
+            storage.get(`rest/V1/products/${this.sku()}`)
+                .done(response => {
+                    console.log(response)
+                })
         }
     });
 });
