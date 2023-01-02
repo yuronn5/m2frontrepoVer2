@@ -1,4 +1,4 @@
-define(['uiComponent', 'ko', 'mage/storage'], function (Component, ko, storage) {
+define(['uiComponent', 'ko', 'mage/storage', 'jquery'], function (Component, ko, storage, $) {
     'use strict';
 
     return Component.extend({
@@ -16,6 +16,7 @@ define(['uiComponent', 'ko', 'mage/storage'], function (Component, ko, storage) 
         },
 
         handleSubmit() {
+            $('body').trigger('processStart');
             this.messageResponse('');
             this.isSuccess(false); //reset value to default
 
@@ -29,6 +30,9 @@ define(['uiComponent', 'ko', 'mage/storage'], function (Component, ko, storage) 
                 .fail(() => {
                     this.messageResponse('Product not found!');
                     this.isSuccess(false);
+                })
+                .always(() => {
+                    $('body').trigger('processStop');
                 })
         }
     });
