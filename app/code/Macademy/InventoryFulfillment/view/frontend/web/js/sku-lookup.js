@@ -1,10 +1,10 @@
-define(['uiComponent', 'ko', 'mage/storage', 'jquery'], function (Component, ko, storage, $) {
+define(['uiComponent', 'ko', 'mage/storage', 'jquery', 'mage/translate'], function (Component, ko, storage, $, $t) {
     'use strict';
 
     return Component.extend({
         defaults: {
             sku: ko.observable('24-MB01'),
-            placeholder: 'Example: 24t61',
+            placeholder: $t('Example: %1').replace('%1', '24-MB01'),
             messageResponse: ko.observable(''),
             isSuccess: ko.observable(false)
         },
@@ -24,11 +24,11 @@ define(['uiComponent', 'ko', 'mage/storage', 'jquery'], function (Component, ko,
 
             storage.get(`rest/V1/products/${this.sku()}`)
                 .done(response => {
-                    this.messageResponse(`Product found <strong>${response.name}</strong>`);
+                    this.messageResponse($t('Product found %1').replace('%1', `<strong>${response.name}</strong>`));
                     this.isSuccess(true); //if success we set true
                 })
                 .fail(() => {
-                    this.messageResponse('Product not found!');
+                    this.messageResponse($t('Product not found!'));
                     this.isSuccess(false);
                 })
                 .always(() => {
