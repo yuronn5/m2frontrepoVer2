@@ -9,7 +9,15 @@ define([
 
     return Component.extend({
         defaults: {
-            boxConfigurations: ko.observableArray(['abc', 'def'])
+            boxConfigurations: ko.observableArray([{
+                length: 10,
+                width: 13,
+                height: 14
+            }, {
+                length: 11,
+                width: 14,
+                height: 15
+            }])
         },
 
         initialize() {
