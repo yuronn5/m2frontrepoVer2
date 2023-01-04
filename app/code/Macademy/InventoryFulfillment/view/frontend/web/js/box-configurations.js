@@ -7,17 +7,20 @@ define([
 ) {
     'use strict';
 
+    const boxConfiguration = () => {
+        return {
+            length: ko.observable(),
+            width: ko.observable(),
+            height: ko.observable(),
+            weight: ko.observable(),
+            unitsPerBox: ko.observable(),
+            numberOfBoxes: ko.observable(),
+        }
+    }
+
     return Component.extend({
         defaults: {
-            boxConfigurations: ko.observableArray([{
-                length: 10,
-                width: 13,
-                height: 14
-            }, {
-                length: 11,
-                width: 14,
-                height: 15
-            }])
+            boxConfigurations: ko.observableArray([boxConfiguration()])
         },
 
         initialize() {
