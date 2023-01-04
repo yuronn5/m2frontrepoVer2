@@ -36,6 +36,10 @@ define([
         handleDelete(index) {
             console.log('deleted configuration', this, index);
             this.boxConfigurations.splice(index, 1);
+        },
+
+        handleSubmit() {
+            console.log('submited form config')
         }
     });
 });
