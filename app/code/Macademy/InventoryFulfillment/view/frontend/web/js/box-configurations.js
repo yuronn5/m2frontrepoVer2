@@ -31,6 +31,11 @@ define([
 
         handleAdd() {
             this.boxConfigurations.push(boxConfiguration())
+        },
+
+        handleDelete(index) {
+            console.log('deleted configuration', this, index);
+            this.boxConfigurations.splice(index, 1);
         }
     });
 });
