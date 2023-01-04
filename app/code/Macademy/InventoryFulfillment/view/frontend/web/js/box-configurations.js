@@ -27,6 +27,10 @@ define([
             this._super();
 
             console.log("the box config component loaded");
+        },
+
+        handleAdd() {
+            this.boxConfigurations.push(boxConfiguration())
         }
     });
 });
