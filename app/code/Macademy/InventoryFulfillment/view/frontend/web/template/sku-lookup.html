@@ -7,7 +7,7 @@
 
     <form data-bind="submit : handleSubmit">
         <input id="sku" name="sku" type="text" data-bind="textInput: sku, attr: { placeholder: placeholder  }" />
-        <button type="submit"><!-- ko i18n: 'Confirm Sku' --><!-- /ko --></button>
+        <button class="action primary" type="submit"><!-- ko i18n: 'Confirm Sku' --><!-- /ko --></button>
         <div data-bind="html: messageResponse, style: { color: isSuccess() ? 'green' : 'red'}"></div>
     </form>
 </div>
