@@ -1,41 +1,44 @@
 define([
     'uiComponent',
-    'ko'
+    'ko',
+    'Macademy_InventoryFulfillment/js/model/box-configuration',
+    'Macademy_InventoryFulfillment/js/model/sku'
 ], function (
     Component,
-    ko
+    ko,
+    boxConfigurationsModel,
+    skuModel
 ) {
     'use strict';
 
-    const boxConfiguration = () => {
-        return {
-            length: ko.observable(),
-            width: ko.observable(),
-            height: ko.observable(),
-            weight: ko.observable(),
-            unitsPerBox: ko.observable(),
-            numberOfBoxes: ko.observable(),
-        }
-    }
+
 
     return Component.extend({
         defaults: {
-            boxConfigurations: ko.observableArray([boxConfiguration()])
+            boxConfigurationsModel: boxConfigurationsModel
         },
 
         initialize() {
             this._super();
 
             console.log("the box config component loaded");
+
+            skuModel.isSuccess.subscribe((value) => {
+                console.log('sku is success new value', value)
+            });
+
+            skuModel.isSuccess.subscribe((value) => {
+                console.log('sku is success old value', value)
+            }, null, 'beforeChange');
         },
 
         handleAdd() {
-            this.boxConfigurations.push(boxConfiguration())
+            boxConfigurationsModel.add();
         },
 
         handleDelete(index) {
             console.log('deleted configuration', this, index);
-            this.boxConfigurations.splice(index, 1);
+            boxConfigurationsModel.delete(index)
         },
 
         handleSubmit() {
