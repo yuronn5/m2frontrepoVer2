@@ -1,26 +1,19 @@
 define([
     'uiComponent',
-    'ko'
+    'ko',
+    'Macademy_InventoryFulfillment/js/model/box-configuration'
 ], function (
     Component,
-    ko
+    ko,
+    boxConfigurationsModel
 ) {
     'use strict';
 
-    const boxConfiguration = () => {
-        return {
-            length: ko.observable(),
-            width: ko.observable(),
-            height: ko.observable(),
-            weight: ko.observable(),
-            unitsPerBox: ko.observable(),
-            numberOfBoxes: ko.observable(),
-        }
-    }
+
 
     return Component.extend({
         defaults: {
-            boxConfigurations: ko.observableArray([boxConfiguration()])
+            boxConfigurationsModel: boxConfigurationsModel
         },
 
         initialize() {
@@ -30,12 +23,12 @@ define([
         },
 
         handleAdd() {
-            this.boxConfigurations.push(boxConfiguration())
+            boxConfigurationsModel.add();
         },
 
         handleDelete(index) {
             console.log('deleted configuration', this, index);
-            this.boxConfigurations.splice(index, 1);
+            boxConfigurationsModel.delete(index)
         },
 
         handleSubmit() {
