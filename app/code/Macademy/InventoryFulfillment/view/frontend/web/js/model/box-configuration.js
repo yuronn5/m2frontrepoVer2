@@ -2,7 +2,8 @@ define(["ko"], function (ko) {
     'use strict';
 
     const boxConfiguration = () => {
-        return {
+        const divisor = 139;
+        const data = {
             length: ko.observable(),
             width: ko.observable(),
             height: ko.observable(),
@@ -10,6 +11,14 @@ define(["ko"], function (ko) {
             unitsPerBox: ko.observable(),
             numberOfBoxes: ko.observable(),
         }
+
+        data.dimensionalWeight = ko.computed(() => {
+            const result = data.length() * data.width() * data.height() / divisor;
+            return Math.round(result * data.numberOfBoxes());
+            // require('uiRegistry').get('boxConfigurations').boxConfigurationsModel.boxConfigurations()[0].dimensionalWeight()
+        })
+
+        return data;
     }
 
     return {
