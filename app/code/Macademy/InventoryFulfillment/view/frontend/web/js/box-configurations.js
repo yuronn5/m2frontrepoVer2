@@ -47,8 +47,10 @@ define([
             $('.box-configurations form input').removeAttr('aria-invalid');
 
             if($('.box-configurations form').valid()) {
+                boxConfigurationsModel.isSuccess(true)
                 console.log('box confuguration success');
             } else {
+                boxConfigurationsModel.isSuccess(false)
                 console.log('box configuration error');
             }
             console.log('submited form config')
