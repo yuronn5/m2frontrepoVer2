@@ -3,6 +3,7 @@
     <h2 data-bind="i18n: 'Box configurations'"></h2>
     <form data-bind="submit: handleSubmit">
         <table>
+            <!-- ko if: true -->
             <thead>
             <tr>
                 <th data-bind="i18n: 'Units per box'"></th>
@@ -12,6 +13,16 @@
                 <th></th>
             </tr>
             </thead>
+            <!-- /ko -->
+            <!-- ko if: false -->
+            <tr>
+                <th data-bind="i18n: 'Units per box'"></th>
+                <th data-bind="i18n: 'Number of boxes'"></th>
+                <th data-bind="i18n: 'Box weight (lb.)'"></th>
+                <th data-bind="i18n: 'Box dimensions (in.)'"></th>
+                <th></th>
+            </tr>
+            <!-- /ko -->
             <tbody data-bind="foreach: boxConfigurationsModel.boxConfigurations">
             <tr>
                 <td>
