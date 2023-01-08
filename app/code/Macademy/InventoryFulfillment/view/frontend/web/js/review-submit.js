@@ -1,4 +1,4 @@
-define(['uiComponent', 'ko', 'Macademy_InventoryFulfillment/js/model/sku', 'Macademy_InventoryFulfillment/js/model/box-configuration'], function (Component, ko, boxConfigurationsModel, skuModel) {
+define(['uiComponent', 'ko', 'Macademy_InventoryFulfillment/js/model/sku', 'Macademy_InventoryFulfillment/js/model/box-configurations'], function (Component, ko, skuModel, boxConfigurationsModel) {
     'use strict';
 
     return Component.extend({

@@ -1,7 +1,7 @@
 define([
     'uiComponent',
     'ko',
-    'Macademy_InventoryFulfillment/js/model/box-configuration',
+    'Macademy_InventoryFulfillment/js/model/box-configurations',
     'Macademy_InventoryFulfillment/js/model/sku',
     'jquery'
 ], function (
