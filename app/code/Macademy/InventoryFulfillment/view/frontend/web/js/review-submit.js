@@ -3,7 +3,6 @@ define(['uiComponent', 'ko', 'Macademy_InventoryFulfillment/js/model/sku', 'Maca
 
     return Component.extend({
         defaults: {
-            numberOfBoxes: 0,
             shipmentWeight: 0,
             billableWeight: 0,
             isTermsChecked: ko.observable(false)
@@ -18,6 +17,12 @@ define(['uiComponent', 'ko', 'Macademy_InventoryFulfillment/js/model/sku', 'Maca
                 return skuModel.isSuccess()
                     && boxConfigurationsModel.isSuccess()
                     && this.isTermsChecked();
+            })
+
+            this.numberOfBoxes = ko.computed(() => {
+                return boxConfigurationsModel.boxConfigurations().reduce(function (runningTotal, boxConfiguration) {
+                    return runningTotal + (boxConfiguration.numberOfBoxes() || 0)
+                }, 0);
             })
         },
 
