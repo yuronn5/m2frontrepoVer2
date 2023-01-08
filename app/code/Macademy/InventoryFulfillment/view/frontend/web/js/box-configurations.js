@@ -17,7 +17,8 @@ define([
 
     return Component.extend({
         defaults: {
-            boxConfigurationsModel: boxConfigurationsModel
+            boxConfigurationsModel: boxConfigurationsModel,
+            skuModel: skuModel
         },
 
         initialize() {

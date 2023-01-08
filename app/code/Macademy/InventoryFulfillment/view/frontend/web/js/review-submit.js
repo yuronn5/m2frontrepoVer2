@@ -6,7 +6,8 @@ define(['uiComponent', 'ko', 'Macademy_InventoryFulfillment/js/model/sku', 'Maca
             numberOfBoxes: boxConfigurationsModel.numberOfBoxes(),
             shipmentWeight: 0,
             billableWeight: 0,
-            isTermsChecked: ko.observable(false)
+            isTermsChecked: ko.observable(false),
+            boxConfigurationsIsSuccess: boxConfigurationsModel.isSuccess
         },
 
         initialize() {
