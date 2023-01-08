@@ -2,12 +2,14 @@ define([
     'uiComponent',
     'ko',
     'Macademy_InventoryFulfillment/js/model/box-configuration',
-    'Macademy_InventoryFulfillment/js/model/sku'
+    'Macademy_InventoryFulfillment/js/model/sku',
+    'jquery'
 ], function (
     Component,
     ko,
     boxConfigurationsModel,
-    skuModel
+    skuModel,
+    $
 ) {
     'use strict';
 
@@ -42,6 +44,13 @@ define([
         },
 
         handleSubmit() {
+            $('.box-configurations form input').removeAttr('aria-invalid');
+
+            if($('.box-configurations form').valid()) {
+                console.log('box confuguration success');
+            } else {
+                console.log('box configuration error');
+            }
             console.log('submited form config')
         }
     });
