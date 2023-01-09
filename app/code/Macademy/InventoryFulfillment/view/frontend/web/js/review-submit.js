@@ -1,4 +1,4 @@
-define(['uiComponent', 'ko', 'Macademy_InventoryFulfillment/js/model/sku', 'Macademy_InventoryFulfillment/js/model/box-configurations', 'mage/url'], function (Component, ko, skuModel, boxConfigurationsModel, url) {
+define(['uiComponent', 'ko', 'Macademy_InventoryFulfillment/js/model/sku', 'Macademy_InventoryFulfillment/js/model/box-configurations', 'mage/url', 'mage/storage'], function (Component, ko, skuModel, boxConfigurationsModel, url, storage) {
     'use strict';
 
     return Component.extend({
@@ -27,8 +27,13 @@ define(['uiComponent', 'ko', 'Macademy_InventoryFulfillment/js/model/sku', 'Maca
         handleSubmit() {
             if(this.canSubmit()){
                 console.log("the reviewSubmit form  has been submitted");
-                return true;
-
+                storage
+                    .post(this.getUrl(), {
+                        'sku': skuModel.sku(),
+                        'boxConfigurations': ko.toJSON(boxConfigurationsModel.boxConfigurations)
+                    })
+                    .done(responce => console.log('responce', responce))
+                    .fail(err => console.log('error', err));
             } else {
                 console.log("the reviewSubmit form  has an error")
 
