@@ -1,4 +1,4 @@
-define(['uiComponent', 'ko', 'Macademy_InventoryFulfillment/js/model/sku', 'Macademy_InventoryFulfillment/js/model/box-configurations'], function (Component, ko, skuModel, boxConfigurationsModel) {
+define(['uiComponent', 'ko', 'Macademy_InventoryFulfillment/js/model/sku', 'Macademy_InventoryFulfillment/js/model/box-configurations', 'mage/url'], function (Component, ko, skuModel, boxConfigurationsModel, url) {
     'use strict';
 
     return Component.extend({
@@ -7,7 +7,9 @@ define(['uiComponent', 'ko', 'Macademy_InventoryFulfillment/js/model/sku', 'Maca
             shipmentWeight: 0,
             billableWeight: 0,
             isTermsChecked: ko.observable(false),
-            boxConfigurationsIsSuccess: boxConfigurationsModel.isSuccess
+            boxConfigurationsIsSuccess: boxConfigurationsModel.isSuccess,
+            boxConfigurations: boxConfigurationsModel.boxConfigurations,
+            sku: skuModel.sku
         },
 
         initialize() {
@@ -24,12 +26,16 @@ define(['uiComponent', 'ko', 'Macademy_InventoryFulfillment/js/model/sku', 'Maca
 
         handleSubmit() {
             if(this.canSubmit()){
-                console.log("the reviewSubmit form  has been submitted")
+                console.log("the reviewSubmit form  has been submitted");
+                return true;
 
             } else {
                 console.log("the reviewSubmit form  has an error")
 
             }
+        },
+        getUrl() {
+            return url.build('inventory-fulfillment/index/post');
         }
 
     });
