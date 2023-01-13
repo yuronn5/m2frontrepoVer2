@@ -6,10 +6,14 @@ define([
     'use strict';
 
     return Component.extend({
+        defaults: {
+            message: 'Free shipping message'
+        },
+
         initialize: function () {
             this._super();
 
-            console.log("free shipping banner component is loaded");
+            console.log(this.message);
         }
     });
 });
