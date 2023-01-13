@@ -7,7 +7,8 @@ define([
 
     return Component.extend({
         defaults: {
-            message: 'Free shipping message'
+            message: 'Free shipping message',
+            template: 'Macademy_FreeShippingPromo/free-shipping-banner'
         },
 
         initialize: function () {
