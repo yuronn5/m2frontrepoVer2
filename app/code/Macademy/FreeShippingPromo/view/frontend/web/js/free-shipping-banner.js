@@ -5,7 +5,11 @@ define([
 ) {
     'use strict';
 
-    console.log("free shipping banner component is loaded")
+    return Component.extend({
+        initialize: function () {
+            this._super();
 
-    return Component;
+            console.log("free shipping banner component is loaded");
+        }
+    });
 });
