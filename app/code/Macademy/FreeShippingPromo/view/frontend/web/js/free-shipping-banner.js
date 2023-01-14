@@ -7,8 +7,11 @@ define([
 
     return Component.extend({
         defaults: {
-            subtotal: 30.00,
-            template: 'Macademy_FreeShippingPromo/free-shipping-banner'
+            subtotal: ko.observable(30.00),
+            template: 'Macademy_FreeShippingPromo/free-shipping-banner',
+            tracks: {
+                subtotal: true
+            }
         },
 
         initialize: function () {
@@ -18,7 +21,7 @@ define([
         },
 
         formatCurrency: function (value) {
-            return '$' + value.toFixed(2);
+            return '$' + value().toFixed(2);
         }
     });
 });
