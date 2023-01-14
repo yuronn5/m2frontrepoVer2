@@ -7,7 +7,7 @@ define([
 
     return Component.extend({
         defaults: {
-            message: 'Free shipping message',
+            subtotal: 30.00,
             template: 'Macademy_FreeShippingPromo/free-shipping-banner'
         },
 
@@ -15,6 +15,10 @@ define([
             this._super();
 
             console.log(this.message);
+        },
+
+        formatCurrency: function (value) {
+            return '$' + value.toFixed(2);
         }
     });
 });
