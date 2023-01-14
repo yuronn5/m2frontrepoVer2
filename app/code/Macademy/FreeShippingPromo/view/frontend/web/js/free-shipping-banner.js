@@ -1,13 +1,15 @@
 define([
-    "uiComponent"
+    "uiComponent",
+    'Magento_Customer/js/customer-data'
 ], function (
-    Component
+    Component,
+    customerData
 ) {
     'use strict';
 
     return Component.extend({
         defaults: {
-            subtotal: ko.observable(30.00),
+            subtotal: 0.00,
             template: 'Macademy_FreeShippingPromo/free-shipping-banner',
             tracks: {
                 subtotal: true
@@ -17,11 +19,18 @@ define([
         initialize: function () {
             this._super();
 
-            console.log(this.message);
+            var self = this;
+            var cart = customerData.get('cart');
+
+            customerData.getInitCustomerData().done(function() {
+                self.subtotal = parseFloat(cart().subtotalAmount);
+                console.log(cart());
+            });
+
         },
 
-        formatCurrency: function (value) {
-            return '$' + value().toFixed(2);
+        formatCurrency: function(value) {
+            return '$' + value.toFixed(2);
         }
     });
 });
