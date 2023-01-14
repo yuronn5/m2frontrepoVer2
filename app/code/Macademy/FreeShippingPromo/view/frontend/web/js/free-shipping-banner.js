@@ -18,3 +18,6 @@ define([
         }
     });
 });
+
+
+//require('uiRegistry').get("free-shipping-banner")     Ui registry tutorial
