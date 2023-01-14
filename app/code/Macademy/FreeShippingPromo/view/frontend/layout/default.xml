@@ -8,7 +8,9 @@
                          <item name="components" xsi:type="array">
                              <item name="free-shipping-banner" xsi:type="array">
                                  <item name="component" xsi:type="string">Macademy_FreeShippingPromo/js/free-shipping-banner</item>
-
+                                 <item name="config" xsi:type="array">
+                                     <item name="message" xsi:type="string">Free shipping banner from XML</item>
+                                 </item>
                              </item>
                          </item>
                      </argument>
