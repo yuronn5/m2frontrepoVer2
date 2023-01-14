@@ -1,9 +1,11 @@
 define([
     "uiComponent",
-    'Magento_Customer/js/customer-data'
+    'Magento_Customer/js/customer-data',
+    'underscore'
 ], function (
     Component,
-    customerData
+    customerData,
+    _
 ) {
     'use strict';
 
@@ -23,8 +25,10 @@ define([
             var cart = customerData.get('cart');
 
             customerData.getInitCustomerData().done(function() {
-                self.subtotal = parseFloat(cart().subtotalAmount);
-                console.log(cart());
+                if(!_.isEmpty(cart()) && !_.isUndefined(cart().subtotalAmount)) {
+                    self.subtotal = parseFloat(cart().subtotalAmount);
+                    console.log(cart());
+                }
             });
 
         },
