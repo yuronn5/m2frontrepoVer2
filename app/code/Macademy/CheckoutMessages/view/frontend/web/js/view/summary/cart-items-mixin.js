@@ -9,6 +9,10 @@
                     'totals.subtotal': 'checkout.sidebar.guarantee:subtotal'
                 }
             },
+            initialize: function() {
+                this._super();
+                console.log('shippingTime initialized');
+            },
             isItemsBlockExpanded: function() {
                 // If you wish to execute parent method, be sure to call
                 // this._super();

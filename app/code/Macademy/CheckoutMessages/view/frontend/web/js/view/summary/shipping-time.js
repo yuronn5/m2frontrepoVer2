@@ -11,6 +11,10 @@ define(['uiComponent'], function(Component) {
                 'checkoutProvider:shippingAddress.region_id': 'handleRegionChange'
             }
         },
+        initialize: function() {
+            this._super();
+            console.log('shippingTime initialized');
+        },
         showMessage: function() {
             return this.countryId === 'US';
         },
