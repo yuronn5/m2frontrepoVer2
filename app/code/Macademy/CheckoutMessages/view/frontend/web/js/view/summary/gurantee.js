@@ -4,11 +4,10 @@ define(['uiComponent'], function(Component) {
     return Component.extend({
         initialize: function() {
             this._super();
-            console.log('shippingTime initialized');
+            console.log('guarantee initialized');
         },
         showMessage: function() {
             return this.subtotal > 100;
         }
-
     });
 });
