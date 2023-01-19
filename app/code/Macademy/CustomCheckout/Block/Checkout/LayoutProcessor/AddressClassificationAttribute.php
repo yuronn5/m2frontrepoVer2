@@ -18,7 +18,7 @@ class AddressClassificationAttribute implements LayoutProcessorInterface
 
         $attributeData['config']['customScope'] = 'shippingAddress.custom_attributes';
         $attributeData['dataScope'] = "shippingAddress.custom_attributes.$attributeCode";
-
+        //
         foreach ($jsLayout['components']['checkout']['children']
                  ['steps']['children']
                  ['billing-step']['children']
@@ -29,6 +29,7 @@ class AddressClassificationAttribute implements LayoutProcessorInterface
                 unset($fields[$attributeCode]);
             }
         }
+        //
 
         return $jsLayout;
     }
